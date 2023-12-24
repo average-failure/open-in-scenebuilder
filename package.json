@@ -1,0 +1,88 @@
+{
+  "name": "open-in-scenebuilder",
+  "displayName": "Open in Scene Builder",
+  "description": "Open FXML files into Scene Builder from VSCodium",
+  "version": "0.0.1",
+  "private": true,
+  "publisher": "average-failure",
+  "author": {
+    "name": "average-failure",
+    "url": "https://github.com/average-failure",
+    "email": "jarrettchong07@gmail.com"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "open-in-scenebuilder.openSelectedFile",
+        "title": "Open in Scene Builder",
+        "category": "SceneBuilder"
+      },
+      {
+        "command": "open-in-scenebuilder.openCurrentFile",
+        "title": "Open in Scene Builder",
+        "category": "SceneBuilder"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "open-in-scenebuilder.openSelectedFile",
+          "when": "false"
+        },
+        {
+          "command": "open-in-scenebuilder.openCurrentFile",
+          "when": "true"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "open-in-scenebuilder.openSelectedFile",
+          "when": "resourceExtname == .fxml",
+          "group": "fxml@1"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Scene Builder",
+      "properties": {
+        "open-in-scenebuilder.scenebuilderExecutable": {
+          "type": "string",
+          "description": "The path to the Scene Builder executable."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.1",
+    "@typescript-eslint/parser": "^6.13.1",
+    "@vscode/test-cli": "^0.0.4",
+    "@vscode/test-electron": "^2.3.8",
+    "eslint": "^8.54.0",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.3.2",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4"
+  }
+}
